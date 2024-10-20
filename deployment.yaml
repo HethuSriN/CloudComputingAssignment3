@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: textfile-processor-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: textfile-processor
+  template:
+    metadata:
+      labels:
+        app: textfile-processor
+    spec:
+      containers:
+        - name: textfile-processor
+          image: hethusri/textfile-processor:latest
+          command: ["/bin/sh", "-c", "sleep 3600"] # Keep the container running
+          ports:
+            - containerPort: 80
